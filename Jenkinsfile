@@ -1,10 +1,9 @@
- 
  pipeline {
    agent any
    stages{ 
      stage("Git checkout") {
      steps{
-          git 'https://github.com/demodevops2/java-hello-world-webapp.git'
+          git 'https://github.com/HemaSahuRathore/java-hello-world-webapp.git'
           }
      }
 
@@ -18,11 +17,11 @@
 
      stage("war file deploy"){
      steps{
-     sshagent(['ec2-tomcat-cred-id']) {
-        sh "scp -o StrictHostKeyChecking=no target/myweb.war ubuntu@172.31.7.110:/var/lib/tomcat8/webapps"
+     sshagent(['Tomcat-Key']) {
+        sh "scp -o StrictHostKeyChecking=no target/myweb.war ubuntu@172.31.13.197:/opt/tomcat/webapps"
         }
-     }
-     }
-
+       }
       }
+
+   }
 }

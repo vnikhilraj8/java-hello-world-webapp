@@ -1,0 +1,21 @@
+version: 0.2
+
+env:
+  variables:
+    JAVA_HOME: "/usr/lib/jvm/java-11-openjdk-amd64"
+phases:
+  install:
+    commands:
+    - echo installing maven...
+    - apt-get update -y
+    - apt install openjdk-11-jdk-headless -y
+    - apt-get install -y maven
+  build:
+    commands:
+    - echo building the war file
+    - mvn clean install
+#     - mvn clean deploy sonar:sonar
+artifacts:
+  files:
+  - target/*.war
+  discard-paths: yes
